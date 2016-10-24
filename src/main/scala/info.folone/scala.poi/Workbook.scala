@@ -1,9 +1,10 @@
 package info.folone.scala.poi
 
 import org.apache.poi._
-import ss.usermodel.{Workbook ⇒ POIWorkbook, WorkbookFactory}
-import ss.usermodel.{ Row ⇒ POIRow, Cell ⇒ POICell, CellStyle ⇒ POICellStyle }
-import java.io.{ File, FileOutputStream, OutputStream, InputStream }
+import ss.usermodel.{WorkbookFactory, Workbook => POIWorkbook}
+import ss.usermodel.{Cell => POICell, CellStyle => POICellStyle, Row => POIRow}
+import java.io.{File, FileOutputStream, InputStream, OutputStream}
+import java.util.Date
 
 import scalaz._
 import std.map._
@@ -219,6 +220,7 @@ sealed abstract class Cell(val index: Int, val style: Option[CellStyle]) {
 case class StringCell(override val index: Int, data: String) extends Cell(index, None)
 case class NumericCell(override val index: Int, data: Double) extends Cell(index, None)
 case class BooleanCell(override val index: Int, data: Boolean) extends Cell(index, None)
+case class DateCell(override val index: Int, data: Date) extends Cell(index, None)
 class FormulaCell(override val index: Int, val data: String) extends Cell(index, None) {
   import equalities.formulaCellEqualInstance
   override def equals(obj: Any) =
